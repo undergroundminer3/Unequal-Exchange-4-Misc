@@ -35,23 +35,28 @@ public abstract class BlockEE_BC extends BlockContainer {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+	public void onBlockPlacedBy(final World world,
+			final int x, final int y, final int z,
+			final EntityLivingBase entity, final ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, entity, stack);
-		TileEntity tile = world.getTileEntity(x, y, z);
+		final TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile instanceof TileEntityEE_BC) {
 			((TileEntityEE_BC) tile).onBlockPlacedBy(entity, stack);
 		}
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
+	public void breakBlock(final World world,
+			final int x, final int y, final int z,
+			final Block block, final int par6) {
 		Utils.preDestroyBlock(world, x, y, z);
 		super.breakBlock(world, x, y, z, block, par6);
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public int getLightValue(final IBlockAccess world,
+			final int x, final int y, final int z) {
+		final TileEntity tile = world.getTileEntity(x, y, z);
 		if (tile instanceof IMachine && ((IMachine) tile).isActive())
 			return super.getLightValue(world, x, y, z) + 8;
 		return super.getLightValue(world, x, y, z);

@@ -8,18 +8,6 @@
  */
 package me.undergroundminer3.uee4.abstacts;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.api.power.IPowerReceptor;
-import buildcraft.core.DefaultProps;
-import buildcraft.core.network.BuildCraftPacket;
-import buildcraft.core.network.ISynchronizedTile;
-import buildcraft.core.network.PacketPayload;
-import buildcraft.core.network.PacketPayloadArrays;
-import buildcraft.core.network.PacketTileUpdate;
-import buildcraft.core.network.PacketUpdate;
-import buildcraft.core.network.TilePacketWrapper;
-import buildcraft.core.utils.Utils;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +19,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
+import buildcraft.BuildCraftCore;
+import buildcraft.api.power.IPowerReceptor;
+import buildcraft.core.DefaultProps;
+import buildcraft.core.network.BuildCraftPacket;
+import buildcraft.core.network.ISynchronizedTile;
+import buildcraft.core.network.PacketPayload;
+import buildcraft.core.network.PacketTileUpdate;
+import buildcraft.core.network.PacketUpdate;
+import buildcraft.core.network.TilePacketWrapper;
+import buildcraft.core.utils.Utils;
+//TODO fix
 public abstract class TileEntityEE_BC extends TileEntity implements ISynchronizedTile {
 
 	@SuppressWarnings("rawtypes")
@@ -69,7 +67,7 @@ public abstract class TileEntityEE_BC extends TileEntity implements ISynchronize
 		}
 
 		if (this instanceof IPowerReceptor) {
-			IPowerReceptor receptor = ((IPowerReceptor) this);
+			IPowerReceptor receptor = (IPowerReceptor) this;
 			receptor.getPowerReceiver(null).update();
 		}
 	}
@@ -85,8 +83,9 @@ public abstract class TileEntityEE_BC extends TileEntity implements ISynchronize
 	}
 
 	public void onBlockPlacedBy(EntityLivingBase entity, ItemStack stack) {
-		if (entity instanceof EntityPlayer)
+		if (entity instanceof EntityPlayer) {
 			owner = ((EntityPlayer) entity).getDisplayName();
+		}
 	}
 
 	public void destroy() {
@@ -116,16 +115,12 @@ public abstract class TileEntityEE_BC extends TileEntity implements ISynchronize
 
 	@Override
 	public void handleDescriptionPacket(PacketUpdate packet) throws IOException {
-		if (packet.payload instanceof PacketPayloadArrays) {
-			descriptionPacket.fromPayload(this, (PacketPayloadArrays) packet.payload);
-		}
+		descriptionPacket.fromPayload(this, packet.payload);
 	}
 
 	@Override
 	public void handleUpdatePacket(PacketUpdate packet) throws IOException {
-		if (packet.payload instanceof PacketPayloadArrays) {
-			updatePacket.fromPayload(this, (PacketPayloadArrays) packet.payload);		
-		}
+		updatePacket.fromPayload(this, packet.payload);
 	}
 
 	@Override
@@ -141,8 +136,9 @@ public abstract class TileEntityEE_BC extends TileEntity implements ISynchronize
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		if (nbt.hasKey("owner"))
+		if (nbt.hasKey("owner")) {
 			owner = nbt.getString("owner");
+		}
 	}
 
 	public World getWorld() {

@@ -20,7 +20,7 @@ public final class CheatDetector {
 
 	public final static void shutdown() {
 		LogHelper.fatal("[UEE4-Api] A shutdown was requested!");
-		LogHelper.fatal(new Throwable());
+		(new Throwable()).printStackTrace();
 		stop = true;
 	}
 	

@@ -19,7 +19,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-public class BucketHelper {
+public final class BucketHelper {
 
         public static BucketHelper INSTANCE = new BucketHelper();
         public Map<Block, Item> buckets = new HashMap<Block, Item>();

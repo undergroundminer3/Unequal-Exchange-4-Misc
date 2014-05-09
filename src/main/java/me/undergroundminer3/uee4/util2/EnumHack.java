@@ -53,12 +53,12 @@ public final class EnumHack {
 				accessMethod.setAccessible(true);
 				ctorc = (ConstructorAccessor) accessMethod.invoke(c, new Object[] {});
 			}
-			
-			Type[] params = c.getGenericParameterTypes();
-			
-			for (int p = 0; p < params.length; p++) {
-				System.out.println(params[p].getTypeName());
-			}
+//			
+//			Type[] params = c.getGenericParameterTypes();
+//			
+//			for (int p = 0; p < params.length; p++) {
+//				System.out.println(params[p].getTypeName());
+//			}
 			
 			result = ctorc.newInstance(args);
 		} catch (final Exception e) {

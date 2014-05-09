@@ -18,6 +18,8 @@ public final class Config {
 	public static boolean difficultyAffectsExplosionSize = true;
 
 	public static boolean forceNoClientInit = false;
+	
+	public static int tabExpandSpeed = 4;
 
 	public static void load(final File file) {
 		if (loaded) return;
@@ -55,6 +57,7 @@ public final class Config {
 		difficultyAffectsExplosionSize = config.get("difficulty", "explsionsCheckDifficulty", true, "Machines will explode 1/2 hard in easy, 1x in normal, and 2x in hard.").getBoolean(true);
 		forceNoClientInit = config.get("debug", "forceNoClientInit", false, "Prevents the fancy blocks from loading their renderers. Do not use unless necessary").getBoolean(false);
 
+		tabExpandSpeed = config.get("gui", "ledgerExpandSpeed", 4, "How fast the ledgers will expand/collapse").getInt(4);
 		config.save();
 	}
 }
